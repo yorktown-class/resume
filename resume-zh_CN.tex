@@ -1,0 +1,112 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8 Unicode
+% !Mode:: "TeX:UTF-8"
+
+\PassOptionsToPackage{colorlinks,urlcolor=blue}{hyperref}
+
+
+\documentclass{resume}
+
+
+% \usepackage[colorlinks,urlcolor=blue,dvipdfm]{hyperref}
+
+\usepackage{zh_CN-Adobefonts_external} % Simplified Chinese Support using external fonts (./fonts/zh_CN-Adobe/)
+% \usepackage{zh_CN-Adobefonts_internal} % Simplified Chinese Support using system fonts
+% \usepackage{linespacing_fix} % disable extra space before next section
+
+\usepackage{cite}
+
+\begin{document}
+
+    \pagenumbering{gobble} % suppress displaying page number
+    
+    \name{杨弘}
+    
+    \basicInfo{
+      \email{yanghong1484944458@gmail.com} 
+      \textperiodcentered\ 
+      \phone{(+86) 15058795800} 
+    %   \textperiodcentered\ 
+    %   \linkedin[billryan8]{https://www.linkedin.com/in/billryan8}
+    }
+    
+    % \section{\faHeart\ 意向岗位}
+    % 研发工程师 - 工程/算法
+     
+    \section{\faGraduationCap\  教育背景}
+    
+        \datedsubsection{\textbf{华东师范大学}, 上海}{2019 -- 至今}
+        \textit{本科}\ 数据科学与工程, 预计 2023 年毕业
+    
+    
+    \section{\faStar\ 竞赛经历}
+        ICPC区域赛两金两银，EC final银牌。
+        CCPC区域赛两金一银，CCPC final金牌。
+        
+        \subsection{ICPC}
+            \begin{itemize}
+                \item The 2020 ICPC Asia-East Continent Final Contest, Silver Medal
+                \item The 2020 ICPC Asia Shanghai Regional Contest, Gold Medal
+                \item The 2020 ICPC Asia YinChuan Regional Contest, Gold Medal
+            \end{itemize}
+        \subsection{CCPC}
+            \begin{itemize}
+                \item 2020 China Collegiate Programming Contest Finals, Rank 7, Gold Medal
+                \item 2020 China Collegiate Programming Contest, Changchun Site, Gold Medal
+                \item 2021 China Collegiate Programming Contest, Guilin Site, Rank 6, Gold Medal
+            \end{itemize}
+    
+    \section{\faUsers\ 实习经历}
+        \subsection{图森未来} 
+            \datedline{工程部高精地图实习生}{2022.7.11 - 2022.11.25}
+            地图SDK的维护，地图生产产线组件开发等等。使用的语言为C++和Python。
+            
+    \subsection{\faUsers\ 实习项目经历}
+        \paragraph{TSMap} 图森高精地图C++ SDK\\
+            feature: 实现多点批量查询曲率的API，并优化批量查询的效率（当批量查询点数小于曲线段数时，总消耗时间与单点查询大致相同）。\\
+            此外发现原有曲率查询API存在的bug。
+            
+        \paragraph{MapBuilder} 从采集车获取的kml文件构建高精地图的C++项目\\
+            feature: 处理了部分点点相等判断的问题\\
+            一个点有三个浮点数表示。
+            浮点数相等的判断存在两种逻辑：二进制相等和有eps误差的相等。
+            原来的代码对等号的使用逻辑上比较混乱，部分流程允许误差、部分流程不允许误差。
+            导致不允许误差的流程因为前面积累的误差而出现错误。
+            
+            分析了误差产生累积的原因后在大部分地方修复了问题。
+        % \subsection{Format Convert Service, Post Processing Service: 地图生产产线格式转换服务，制图后处理服务}
+        %     \begin{description}
+        %         \item[格式转换服务] 主要功能是将采集到并经过质量检验的kml文件，转换为符合规格的json文件
+        %         \item[制图后处理服务] 从已经经过质检的地图数据中自动生成冗余数据
+        %     \end{description}
+        \paragraph{DrivableMap} 渲染二维地图可驾驶区域的C++项目\\
+            将二维地图按一定比例缩放到二维矩阵上。
+            通过矩阵对应位置的值来表示相应区域是否有可驾驶地图元素。
+            用于快速判断点是否在可驾驶区域内。
+
+        \paragraph{地图数据生产pipeline} 将地图生产的任务拆分为各个节点，方便溯源和版本管理\\
+            我完成了地图数据产线的部分节点的开发，并通过pytest进行单元测试, 最后以docker image的形式串联到整个流程中。
+            \begin{itemize}
+                \item 格式转换节点: 将数据从kml格式转换为json格式
+                \item 制图后处理节点: 计算地图元素的冗余信息
+            \end{itemize}
+
+    \section{\faBook\ 个人项目}
+        \paragraph{ \href{https://github.com/ya-hong/tiny_coroutine}{tiny\_coroutine}} 基于C++20的单线程并发协程框架\\
+            对C++20的协程进行了封装，可以比较轻松的使用协程。同时实现了协程的时间片轮转，可以让协程在单线程上并发。
+            
+        \paragraph{ \href{https://github.com/ya-hong/recycled_ptr}{recycled\_ptr} } 有垃圾回收能力的指针\\
+            实现垃圾回收指针。在已经指定gc root的前提下，通过标记清除法实现垃圾回收。
+
+        \paragraph{ \href{https://github.com/ya-hong/SATranscriber}{SATranscriber} } 基于openai whisper的实时语音转文字工具\\
+            在whisper的基础上实现对音频流的转录。在延迟2-3s的情况下，可以生成确定性的文字结果，方便接入翻译等下游任务。
+    
+    \section{\faCogs\ IT 技能}
+    \begin{itemize}
+      \item 编程语言: C++, Python
+      \item 平台: Linux
+      \item 其他: Git
+    \end{itemize}
+
+\end{document}
+
