@@ -2,55 +2,68 @@
 
 
 \subsection{TUSIMPLE}
-    \datedline{Map Engineer}{2023.07.03 - today}
+    \datedline{Map Engine Engineer}{2023.07.03 - today}
     \datedline{Map Intern}{2022.07.11 - 2022.11.25}
-    \paragraph{development and maintenance of map SDK TSMap}
+    \paragraph{Map SDK \textit{TSMap}}
         \begin{itemize}
             \item 
-                TSMap is C++
-                TSMap 是所有图森车上软件使用高精地图的 C++ SDK，通过 pybind 提供 python 接口。总计被 100 多软件包所直接或间接依赖。
-                在车上计算资源有限的情况下高效地为算法程序提供它们所需的地图数据和信息。
-                大部分时间是我在进行维护和 feature 开发。
-                保障了路测稳定和算法使用。
+                TSMap is a C++ map SDK used by vehicle softwares in TuSimple.
+                It is used by over 100 packages.
+                % It efficiently provides the required map data and information 
+                The SDK is runing in the limited computing resources available onboard vehicles
+                and provides required data in efficiency.
+                Passed more than a thousand drive-out tests in my maintenance.
             \item 
-                根据感知算法的需求，开发 Perception Drivable Map 组件。
-                能够快速绘制自车矩形范围内的，表示可行驶区域的矩阵。
-                一方面用于快速判断自车附近的物体是否在可行驶区域内，将计算量分布在在线的预处理阶段，更符合算法对性能的需求；
-                另一方面可行驶区域矩阵可以方便的作为模型的输入参数。
+                Developed Perception Drivable Map feature.
+                It segments 2D map into drivable area and undrivable area, 
+                presented as a matrix.
+                The matrix helps perception algorithm efficiently determine whether a point is within the drivable area.
             \item 
-                根据运动规划算法的需求，开发 Planning Drivable Map 组件。
-                能够快速计算路点法线上左右两侧的物理可连续行驶距离。
-                在 Frenet 坐标系上，使用可行驶区域的公共边，通过 BFS 将路径拓展为封闭的左右连续可行驶的多边形，以此来支持快速在大量的纵向距离进行查询。
-                开发完成了高效率的接口，能够用平均 3 ms 完成 1000 m 上 5000 个点的查询。
-                同时允许异步更新并存储任意路线上的结果。
+                Developed Planning Drivable Map feature.
+                It efficiently calculates the length of contiguous drivable area in physical on both sides.
+                It can process 5000 queries in 1000 meters in 3 ms and can calculate asynchronously.
         \end{itemize}
 
-    \paragraph{地图产线}
+    \paragraph{\textit{Map Pipeline}}
         \begin{itemize}
             \item 
-                地图产线是输入感知数据，最终输出地图数据的微服务地图构建系统。
-                我负责开发的主要为支持输入车道线矢量数据，输出包含车道、路口、拓扑关系、物理元素关系等地图元素的母库规格数据，无人工参与，无状态的一系列服务。
+                Map Pipeline is a microservices system for map building
+                that consumes raw sensor data, and products map data.
+                I am responsible for development of a series of services that
+                human intervention-less,
+                stateless.
+                These services support procedure input vector data 
+                and output basedata including lanes, intersections, topology, phiscal element relations.
             \item 
-                开发自动构建、制图后处理服务。
-                自动构建服务从车道线构建车道、车道拓扑关系等地图元素。
-                制图后处理服务输入经过人工质检的自动构建输出，构建路口、路口拓扑关系、物理元素关系等地图元素，能够支持差分更新构建。
-                需要大量计算的数据处理部分使用 C++，与其他服务交互部分使用 Python，并通过 pybind 连接两种语言。
-                通过 opentelemetry 接入可观测性平台，便于快速发现和溯源问题。
-                通过 jenkins 实现 CI/CD。
-                使用 GoogleTest 和 pytest 进行单测。
-                完成负责的各服务的详细设计，使用合理算法高效构建地图元素和关系。
+                Developed major services in procedure that input vector data and output well structured map data.
+                Them support to update build in differential content.
+                Used C++ for computational heavy module,
+                Python for communication with other services.
+                And used pybind to combine the two part.
+                Used jenkins for CI/CD.
+                Applied unittest in GoogleTest and pytest.
             \item 
-                开发格式转换、构建预处理、任务接边等服务。
+                Developed a few services to support
+                converting data format for data producted in other pipeline,
+                filling missing fields in raw input,
+                merging divided map building task.
         \end{itemize}
 
-    \paragraph{地图数据编译程序 Great Map Builder 的维护和开发}
+    \paragraph{Data compiler \textit{Great Map Builder}}
         \begin{itemize}
             \item 
-                Great Map Builder 是高精地图的数据编译软件。
-                输入经过人工标注的矢量数据，自动构建出车道、路口、拓扑关系、物理元素关系等地图元素和属性，并导出可供软件直接使用的二进制 Protobuf 文件。
+                Great Map Builder is a map compiler
+                that consumes annotated vector data
+                and products binary protobuf file
+                which including lanes, intersections, topology, phiscal element relations,
+                and can be directly loaded by map SDK.
             \item 
-                Great Map Builder 是我一人维护。完成修复了生产制图总遇到的各种 bug，保障了在洋山港、曹妃甸、澳洲、日本等地的建图。
+                I am responsible for maintenance and development of Great Map Builder
+                as the primary developer after join the team.
+                Developed feature and fixed bugs in map building.
             \item 
-                根据算法和地图需求，拓展了地图元素类型，支持表达双线型边界、非车道可行驶区域等，同时保证了向前和向后兼容。
+                Extended types of map elements.
+                Supporting describe double line bounds, physical drivable areas, etc.
+                Guranteed forward and backward compatibility.
         \end{itemize}
 
