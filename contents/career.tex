@@ -7,63 +7,63 @@
     \paragraph{Map SDK \textit{TSMap}}
         \begin{itemize}
             \item 
-                TSMap is a C++ map SDK used by vehicle softwares in TuSimple.
+                TSMap is a C++ map SDK used by vehicle software in TuSimple.
                 It is used by over 100 packages.
                 % It efficiently provides the required map data and information 
-                The SDK is runing in the limited computing resources available onboard vehicles
+                The SDK runs on the limited computing resources available onboard vehicles
                 and provides required data in efficiency.
-                Passed more than a thousand drive-out tests in my maintenance.
+                It has passed more than a thousand drive-out tests during my maintenance.
             \item 
-                Developed Perception Drivable Map feature.
-                It segments 2D map into drivable area and undrivable area, 
+                Developed the Perception Drivable Map feature.
+                It segments a 2D map into drivable and undrivable areas, 
                 presented as a matrix.
-                The matrix helps perception algorithm efficiently determine whether a point is within the drivable area.
+                This matrix helps perception algorithms efficiently determine whether a point is within the drivable area.
             \item 
-                Developed Planning Drivable Map feature.
-                It efficiently calculates the length of contiguous drivable area in physical on both sides.
-                It can process 5000 queries in 1000 meters in 3 ms and can calculate asynchronously.
+                Developed the Planning Drivable Map feature.
+                It efficiently calculates the length of contiguous drivable areas in physical on both sides.
+                It can process 5000 queries in 1000 meters within 3 ms and can perform calculations asynchronously.
         \end{itemize}
 
     \paragraph{\textit{Map Pipeline}}
         \begin{itemize}
             \item 
                 Map Pipeline is a microservices system for map building
-                that consumes raw sensor data, and products map data.
-                I am responsible for development of a series of services that
-                human intervention-less,
-                stateless.
-                These services support procedure input vector data 
-                and output basedata including lanes, intersections, topology, phiscal element relations.
+                that consumes raw sensor data, and produces map data.
+                I am responsible for the development of a series of services that are
+                human intervention-free and stateless.
+                These services support processing input vector data 
+                and outputting 
+                basedata including lanes, intersections, topology, phiscal element relations.
             \item 
-                Developed major services in procedure that input vector data and output well structured map data.
-                Them support to update build in differential content.
-                Used C++ for computational heavy module,
-                Python for communication with other services.
-                And used pybind to combine the two part.
+                Developed major services in the procedure that input vector data and output well-structured map data.
+                They support updating map data with differential content.
+                Used C++ for computationally heavy modules
+                and Python for communication with other services.
+                Used pybind to integrate the two parts.
                 Used jenkins for CI/CD.
-                Applied unittest in GoogleTest and pytest.
+                Applied unit testing with GoogleTest and pytest.
             \item 
                 Developed a few services to support
-                converting data format for data producted in other pipeline,
+                converting data formats for data produced in other pipelines,
                 filling missing fields in raw input,
-                merging divided map building task.
+                and merging divided map-building tasks.
         \end{itemize}
 
     \paragraph{Data compiler \textit{Great Map Builder}}
         \begin{itemize}
             \item 
-                Great Map Builder is a map compiler
+                Great Map Builder is a map data compiler
                 that consumes annotated vector data
-                and products binary protobuf file
-                which including lanes, intersections, topology, phiscal element relations,
-                and can be directly loaded by map SDK.
+                and produces binary protobuf files.
+                These files includes lanes, intersections, topology, physical element relations, 
+                and can be directly loaded by the map SDK.
             \item 
-                I am responsible for maintenance and development of Great Map Builder
-                as the primary developer after join the team.
-                Developed feature and fixed bugs in map building.
+                I am responsible for the maintenance and development of Great Map Builder 
+                as the primary developer after joining the team.
+                I have developed features and fixed bugs in map building.
             \item 
-                Extended types of map elements.
-                Supporting describe double line bounds, physical drivable areas, etc.
+                Extended the types of map elements.
+                Added support for describing double line bounds, physical drivable areas, etc.
                 Guranteed forward and backward compatibility.
         \end{itemize}
 
